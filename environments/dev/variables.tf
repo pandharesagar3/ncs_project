@@ -24,7 +24,7 @@ variable "az_count" {
 }
 
 variable "single_nat_gateway" {
-  description = "true = 1 NAT GW (cheaper, single AZ egress dependency). false = 1 per AZ (HA, recommended for prod)."
+  description = "true = 1 NAT GW false = 1 per AZ "
   type        = bool
   default     = true
 }
@@ -66,12 +66,12 @@ variable "db_reader_count" {
 
 variable "db_deletion_protection" {
   type    = bool
-  default = false # set true for prod
+  default = false 
 }
 
 variable "db_skip_final_snapshot" {
   type    = bool
-  default = true # set false for prod
+  default = true 
 }
 
 variable "enable_https" {
