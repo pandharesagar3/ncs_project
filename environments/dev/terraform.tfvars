@@ -1,13 +1,10 @@
-# Copy to terraform.tfvars and adjust as needed.
-
 aws_region   = "us-east-1"
 project_name = "dash-cloudops"
 environment  = "dev"
 
 vpc_cidr           = "10.0.0.0/16"
 az_count           = 2
-single_nat_gateway = true   # false for prod (1 NAT GW per AZ, no shared egress path)
-
+single_nat_gateway = true   
 instance_type        = "t3.micro"
 asg_min_size         = 2
 asg_max_size         = 6
@@ -22,7 +19,7 @@ db_skip_final_snapshot = true   # false for prod
 enable_https        = false
 acm_certificate_arn  = ""
 
-alert_email = "you@example.com"
+alert_email = "spandhare@ncs.com"
 
 enable_ssh        = false
 allowed_ssh_cidrs = []
