@@ -1,0 +1,153 @@
+<svg viewBox="0 0 1200 820" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="1200" height="820" fill="#ffffff"/>
+
+  <text x="600" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#1e293b">
+    BluePeak Technologies — AWS 3-Tier Architecture (dash-cloudops / environments/dev)
+  </text>
+
+  <!-- Internet user -->
+  <circle cx="70" cy="150" r="18" fill="#334155"/>
+  <rect x="58" y="168" width="24" height="34" rx="6" fill="#334155"/>
+  <text x="70" y="220" text-anchor="middle" font-size="12" fill="#334155">Internet users</text>
+  <line x1="90" y1="180" x2="150" y2="180" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Route53/ACM optional note -->
+  <text x="120" y="165" font-size="10" fill="#64748b">(optional Route53 + ACM</text>
+  <text x="120" y="177" font-size="10" fill="#64748b">for custom domain/HTTPS)</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9Z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <!-- Region / VPC outer box -->
+  <rect x="150" y="70" width="1010" height="700" rx="10" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="165" y="95" font-size="13" font-weight="600" fill="#475569">AWS Region — VPC 10.0.0.0/16</text>
+
+  <!-- Internet Gateway -->
+  <rect x="170" y="150" width="90" height="60" rx="8" fill="#e2e8f0" stroke="#475569"/>
+  <text x="215" y="175" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Internet</text>
+  <text x="215" y="190" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Gateway</text>
+  <line x1="260" y1="180" x2="330" y2="180" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ================= AZ A ================= -->
+  <text x="410" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Availability Zone A</text>
+  <rect x="330" y="130" width="360" height="600" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+
+  <!-- Public subnet A -->
+  <rect x="350" y="150" width="320" height="110" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="360" y="168" font-size="11" font-weight="600" fill="#1e3a8a">Public subnet — 10.0.0.0/20</text>
+  <rect x="370" y="180" width="120" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb"/>
+  <text x="430" y="207" text-anchor="middle" font-size="10" fill="#1e3a8a">ALB</text>
+  <text x="430" y="220" text-anchor="middle" font-size="9" fill="#1e3a8a">(internet-facing)</text>
+  <rect x="510" y="180" width="120" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb"/>
+  <text x="570" y="207" text-anchor="middle" font-size="10" fill="#1e3a8a">NAT Gateway</text>
+  <text x="570" y="220" text-anchor="middle" font-size="9" fill="#1e3a8a">(egress only)</text>
+
+  <!-- App subnet A -->
+  <rect x="350" y="280" width="320" height="150" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="360" y="298" font-size="11" font-weight="600" fill="#78350f">Private app subnet — 10.0.4.0/20</text>
+  <rect x="370" y="315" width="130" height="50" rx="6" fill="#fde68a" stroke="#b45309"/>
+  <text x="435" y="345" text-anchor="middle" font-size="10" fill="#78350f">EC2 (ASG) #1</text>
+  <rect x="370" y="375" width="130" height="50" rx="6" fill="#fde68a" stroke="#b45309"/>
+  <text x="435" y="405" text-anchor="middle" font-size="10" fill="#78350f">EC2 (ASG) #2</text>
+  <text x="520" y="340" font-size="9" fill="#78350f" width="140">nginx + PHP-FPM</text>
+  <text x="520" y="355" font-size="9" fill="#78350f">Counter app + api.php</text>
+  <text x="520" y="370" font-size="9" fill="#78350f">CloudWatch agent</text>
+  <text x="520" y="385" font-size="9" fill="#78350f">SSM Session Manager</text>
+  <text x="520" y="400" font-size="9" fill="#78350f">(no SSH by default)</text>
+
+  <!-- Data subnet A -->
+  <rect x="350" y="450" width="320" height="120" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="360" y="468" font-size="11" font-weight="600" fill="#14532d">Private data subnet — 10.0.8.0/20</text>
+  <rect x="370" y="485" width="280" height="65" rx="6" fill="#bbf7d0" stroke="#15803d"/>
+  <text x="510" y="512" text-anchor="middle" font-size="10" fill="#14532d">Aurora MySQL Serverless v2 — Writer</text>
+  <text x="510" y="528" text-anchor="middle" font-size="9" fill="#14532d">0.5–4 ACU · encrypted (KMS) · Multi-AZ storage</text>
+
+  <!-- ================= AZ B ================= -->
+  <text x="800" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#1e293b">Availability Zone B</text>
+  <rect x="720" y="130" width="360" height="600" rx="8" fill="#f8fafc" stroke="#cbd5e1"/>
+
+  <!-- Public subnet B -->
+  <rect x="740" y="150" width="320" height="110" rx="6" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="750" y="168" font-size="11" font-weight="600" fill="#1e3a8a">Public subnet — 10.0.1.0/20</text>
+  <rect x="760" y="180" width="120" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb"/>
+  <text x="820" y="207" text-anchor="middle" font-size="10" fill="#1e3a8a">ALB</text>
+  <text x="820" y="220" text-anchor="middle" font-size="9" fill="#1e3a8a">(2nd AZ target)</text>
+  <rect x="900" y="180" width="120" height="60" rx="6" fill="#bfdbfe" stroke="#2563eb"/>
+  <text x="960" y="207" text-anchor="middle" font-size="10" fill="#1e3a8a">NAT Gateway*</text>
+  <text x="960" y="220" text-anchor="middle" font-size="9" fill="#1e3a8a">*optional per-AZ</text>
+
+  <!-- App subnet B -->
+  <rect x="740" y="280" width="320" height="150" rx="6" fill="#fef3c7" stroke="#d97706"/>
+  <text x="750" y="298" font-size="11" font-weight="600" fill="#78350f">Private app subnet — 10.0.5.0/20</text>
+  <rect x="760" y="315" width="130" height="50" rx="6" fill="#fde68a" stroke="#b45309"/>
+  <text x="825" y="345" text-anchor="middle" font-size="10" fill="#78350f">EC2 (ASG) #3</text>
+  <rect x="760" y="375" width="130" height="50" rx="6" fill="#fde68a" stroke="#b45309"/>
+  <text x="825" y="405" text-anchor="middle" font-size="10" fill="#78350f">…scales 2→6</text>
+  <text x="910" y="340" font-size="9" fill="#78350f">Target-tracking scaling:</text>
+  <text x="910" y="355" font-size="9" fill="#78350f">- CPU 50%</text>
+  <text x="910" y="370" font-size="9" fill="#78350f">- ALB req/target 500</text>
+
+  <!-- Data subnet B -->
+  <rect x="740" y="450" width="320" height="120" rx="6" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="750" y="468" font-size="11" font-weight="600" fill="#14532d">Private data subnet — 10.0.9.0/20</text>
+  <rect x="760" y="485" width="280" height="65" rx="6" fill="#bbf7d0" stroke="#15803d"/>
+  <text x="900" y="512" text-anchor="middle" font-size="10" fill="#14532d">Aurora MySQL Serverless v2 — Reader</text>
+  <text x="900" y="528" text-anchor="middle" font-size="9" fill="#14532d">Auto failover target · read scaling</text>
+
+  <!-- Cross connections -->
+  <line x1="500" y1="210" x2="760" y2="210" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="630" y="205" text-anchor="middle" font-size="9" fill="#2563eb">1 logical ALB</text>
+
+  <line x1="500" y1="518" x2="760" y2="518" stroke="#15803d" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="630" y="513" text-anchor="middle" font-size="9" fill="#15803d">1 Aurora cluster</text>
+
+  <!-- ALB -> ASG arrows -->
+  <line x1="430" y1="240" x2="435" y2="315" stroke="#334155" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="820" y1="240" x2="825" y2="315" stroke="#334155" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ASG -> DB arrows -->
+  <line x1="435" y1="430" x2="500" y2="490" stroke="#334155" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="825" y1="430" x2="900" y2="490" stroke="#334155" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- NAT -> App egress -->
+  <line x1="570" y1="240" x2="500" y2="320" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#arrow)"/>
+  <text x="500" y="270" font-size="9" fill="#64748b">egress (patch/SSM)</text>
+
+  <!-- Cross-cutting services row -->
+  <rect x="170" y="600" width="960" height="150" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text x="185" y="622" font-size="12" font-weight="700" fill="#1e293b">Cross-cutting operational services</text>
+
+  <rect x="185" y="635" width="200" height="95" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+  <text x="285" y="658" text-anchor="middle" font-size="10" font-weight="600" fill="#4c1d95">CloudWatch</text>
+  <text x="285" y="674" text-anchor="middle" font-size="9" fill="#4c1d95">Dashboard + alarms</text>
+  <text x="285" y="688" text-anchor="middle" font-size="9" fill="#4c1d95">(ALB, ASG, Aurora)</text>
+  <text x="285" y="702" text-anchor="middle" font-size="9" fill="#4c1d95">→ SNS → email</text>
+
+  <rect x="400" y="635" width="200" height="95" rx="6" fill="#fee2e2" stroke="#dc2626"/>
+  <text x="500" y="658" text-anchor="middle" font-size="10" font-weight="600" fill="#7f1d1d">Secrets Manager</text>
+  <text x="500" y="674" text-anchor="middle" font-size="9" fill="#7f1d1d">Aurora master creds</text>
+  <text x="500" y="688" text-anchor="middle" font-size="9" fill="#7f1d1d">fetched by EC2 at boot</text>
+  <text x="500" y="702" text-anchor="middle" font-size="9" fill="#7f1d1d">KMS-encrypted</text>
+
+  <rect x="615" y="635" width="200" height="95" rx="6" fill="#e0f2fe" stroke="#0284c7"/>
+  <text x="715" y="658" text-anchor="middle" font-size="10" font-weight="600" fill="#0c4a6e">IAM + KMS</text>
+  <text x="715" y="674" text-anchor="middle" font-size="9" fill="#0c4a6e">Least-privilege instance role</text>
+  <text x="715" y="688" text-anchor="middle" font-size="9" fill="#0c4a6e">SSM Core + CW Agent only</text>
+  <text x="715" y="702" text-anchor="middle" font-size="9" fill="#0c4a6e">Shared CMK, auto-rotated</text>
+
+  <rect x="830" y="635" width="285" height="95" rx="6" fill="#fef9c3" stroke="#ca8a04"/>
+  <text x="972" y="658" text-anchor="middle" font-size="10" font-weight="600" fill="#713f12">S3 (encrypted, private)</text>
+  <text x="972" y="674" text-anchor="middle" font-size="9" fill="#713f12">ALB access logs</text>
+  <text x="972" y="688" text-anchor="middle" font-size="9" fill="#713f12">Terraform remote state (+DynamoDB lock)</text>
+  <text x="972" y="702" text-anchor="middle" font-size="9" fill="#713f12">VPC Flow Logs → CloudWatch Logs</text>
+
+  <!-- Legend -->
+  <text x="185" y="780" font-size="10" fill="#64748b">Tiers: </text>
+  <rect x="225" y="770" width="14" height="14" fill="#dbeafe" stroke="#3b82f6"/><text x="243" y="782" font-size="10" fill="#334155">Public (ALB/NAT)</text>
+  <rect x="365" y="770" width="14" height="14" fill="#fef3c7" stroke="#d97706"/><text x="383" y="782" font-size="10" fill="#334155">Private app (ASG/EC2)</text>
+  <rect x="530" y="770" width="14" height="14" fill="#dcfce7" stroke="#16a34a"/><text x="548" y="782" font-size="10" fill="#334155">Private data (Aurora)</text>
+  <text x="720" y="782" font-size="10" fill="#64748b">All private tiers have no route to the Internet Gateway.</text>
+</svg>
