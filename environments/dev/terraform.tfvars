@@ -1,7 +1,6 @@
 aws_region   = "us-east-1"
 project_name = "dash-cloudops"
 environment  = "dev"
-
 vpc_cidr           = "10.0.0.0/16"
 az_count           = 2
 single_nat_gateway = true   
@@ -9,17 +8,12 @@ instance_type        = "t3.micro"
 asg_min_size         = 2
 asg_max_size         = 6
 asg_desired_capacity = 2
-
-db_min_capacity_acu    = 0.5
 db_max_capacity_acu    = 4
 db_reader_count        = 1
-db_deletion_protection = false  # true for prod
-db_skip_final_snapshot = true   # false for prod
-
+db_deletion_protection = false  
+db_skip_final_snapshot = true   
 enable_https        = false
 acm_certificate_arn  = ""
-
 alert_email = "spandhare@ncs.com"
-
 enable_ssh        = false
 allowed_ssh_cidrs = []
